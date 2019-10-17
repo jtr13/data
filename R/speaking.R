@@ -5,17 +5,15 @@ library(tidyverse)
 library(rvest)
 robotstxt::paths_allowed("https://www.nytimes.com/interactive/2019/10/15/us/elections/debate-speaking-time.html")
 
-heatmap <- read_html("speaking.html") %>%
+heatmap <- read_html("raw/speaking.html") %>%
   html_node("#palette")
 
 issue_name <- heatmap %>%
-  html_nodes(".minlabel") %>%
-  html_nodes("text") %>%
+  html_nodes(".minlabel text") %>%
   html_attr("class")
 
 timelabel <- heatmap %>%
-  html_nodes(".minlabel") %>%
-  html_nodes("text") %>%
+  html_nodes(".minlabel text") %>%
   html_text()
 
 # ex. O'Rourke
@@ -30,8 +28,8 @@ issues_human_readable <- heatmap %>%
   html_nodes("g.tick") %>%
   html_text()
 
-# create strings for use in separating JavaScript classes # of the form
-# "gun-controlorourke" into issues and candidates from issue_candidate
+# create strings for use in separating JavaScript classes  of the form
+# "gun-controlorourke" into issues and candidates from issue_name
 
 # ex. orourke
 names_machine_readable <- names_human_readable %>%
