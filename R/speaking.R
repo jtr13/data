@@ -5,6 +5,8 @@ library(tidyverse)
 library(rvest)
 robotstxt::paths_allowed("https://www.nytimes.com/interactive/2019/10/15/us/elections/debate-speaking-time.html")
 
+## [1] TRUE
+
 heatmap <- read_html("raw/speaking.html") %>%
   html_node("#palette")
 
